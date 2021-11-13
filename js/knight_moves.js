@@ -111,6 +111,10 @@ function random_square() {
     return coord_to_alg(random_int(7), random_int(7))
 }
 
+function get_square(square) {
+    return $board.find("#board_chess_square_" + ChessUtils.convertNotationSquareToIndex(square))
+}
+
 class Game {
     cur_position = random_square()
     targets = [random_square()]
@@ -119,15 +123,15 @@ class Game {
 
     highlight() {
         if (is_white(...alg_to_coord(this.targets[0]))) {
-            $board.find(".square-" + this.targets[0]).addClass("highlight_white")
+            get_square(this.targets[0]).addClass("highlight_white")
         } else {
-            $board.find(".square-" + this.targets[0]).addClass("highlight_black")
+            get_square(this.targets[0]).addClass("highlight_black")
         }
     }
 
     remove_highlights() {
-        $board.find(".square-" + this.targets[0]).removeClass("highlight_white")
-        $board.find(".square-" + this.targets[0]).removeClass("highlight_black")
+        get_square(this.targets[0]).removeClass("highlight_white")
+        get_square(this.targets[0]).removeClass("highlight_black")
     }
 
     next_round() {
@@ -168,16 +172,16 @@ class ForkMode extends Game {
     highlight() {
         this.fork_targets.forEach(square => {
             if (is_white(...alg_to_coord(square))) {
-                $board.find(".square-" + square).addClass("highlight_white")
+                get_square(square).addClass("highlight_white")
             } else {
-                $board.find(".square-" + square).addClass("highlight_black")
+                get_square(square).addClass("highlight_black")
             }
         })
     }
 
     remove_highlights() {
-        this.fork_targets.forEach(square => $board.find(".square-" + square).removeClass("highlight_white"))
-        this.fork_targets.forEach(square => $board.find(".square-" + square).removeClass("highlight_black"))
+        this.fork_targets.forEach(square => get_square(square).removeClass("highlight_white"))
+        this.fork_targets.forEach(square => get_square(square).removeClass("highlight_black"))
     }
 
     next_round() {
@@ -221,18 +225,19 @@ function play(game, timer) {
     $max_rounds.html(max_rounds)
     game.next_round()
 
-    function on_drop(source, destination) {
+    function on_select(square) {
         if (game.is_finished() && rounds == max_rounds) {
-            return "snapback"
+            return
         }
+        return get_knight_moves(square).map(s => ChessUtils.convertNotationSquareToIndex(s))
+    }
 
+    function on_move(move) {
         if (timer.state != "running") {
             timer.start()
         }
 
-        if (!game.move_to(destination)) {
-            return "snapback"
-        }
+        game.move_to(move.to)
 
         if (game.is_finished()) {
             rounds++;
@@ -251,17 +256,24 @@ function play(game, timer) {
                 game.next_round()
             }
         }
+
+        return {
+            [move.to]: "wN"
+        }
     }
 
     const config = {
-        pieceTheme: "img/{piece}.png",
-        draggable: true,
-        onDrop: on_drop,
+        eventHandlers: {
+            onPieceSelected: on_select,
+            onMove: on_move,
+        },
+        useAnimation: false,
+        showNextMove: false,
         position: {
             [game.cur_position]: "wN"
         }
     }
 
-    board = Chessboard("board", config)
+    board = new Chessboard("board", config)
     game.highlight()
 }

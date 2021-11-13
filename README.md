@@ -6,5 +6,6 @@ Check it out at https://senft.github.io/knight-drills/.
 # attributions
 
 * jQuery, https://jquery.com/
-* chessboard incl. images from chessboard.js, https://github.com/oakmac/chessboardjs/
+* ChessboardJS, https://caustique.github.io/chessboard-js/#/, MIT License
+* images taken from https://commons.wikimedia.org/wiki/File:Chess_nlt45.svg, GNU Free Documentation License
 * timer class taken from https://www.101computing.net/stopwatch-class-javascript/

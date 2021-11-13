@@ -1,13 +1,9 @@
 .highlight_white {
-  box-sizing: border-box;
-  border: 3px solid black;
-  background: repeating-linear-gradient(-45deg, #454545, #454545 5px, #f0d9b5 5px, #f0d9b5 15px);
+  background: repeating-linear-gradient(-45deg, #454545, #454545 5px, #ffffff 5px, #ffffff 15px);
 }
 
 .highlight_black {
-  box-sizing: border-box;
-  border: 3px solid black;
-  background: repeating-linear-gradient(-45deg, #454545, #454545 5px, #b58863 5px, #b58863 15px);
+  background: repeating-linear-gradient(-45deg, #454545, #454545 5px, #e5e1d1 5px, #e5e1d1 15px);
 }
 
 #board {
@@ -23,4 +19,14 @@ footer {
   padding-top: 20px;
   display: block;
   clear: both;
+}
+
+/* Overwrite chessboardjs style */
+
+#board div.chess_board div.chess_player_white.chess_piece_knight:after {
+  content: '';
+}
+
+#board div.chess_board div.chess_player_white.chess_piece_knight {
+  background-image: url('../img/knight.svg');
 }
