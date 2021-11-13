@@ -119,13 +119,10 @@ class Game {
     distance = null
 
     highlight() {
-        if (is_white(...alg_to_coord(this.targets[0])))
-        {
-          $board.find(".square-" + this.targets[0]).addClass("highlight_white")
-        }
-        else
-        {
-          $board.find(".square-" + this.targets[0]).addClass("highlight_black")
+        if (is_white(...alg_to_coord(this.targets[0]))) {
+            $board.find(".square-" + this.targets[0]).addClass("highlight_white")
+        } else {
+            $board.find(".square-" + this.targets[0]).addClass("highlight_black")
         }
     }
 
@@ -172,12 +169,9 @@ class ForkMode extends Game {
 
     highlight() {
         this.fork_targets.forEach(square => {
-            if (is_white(...alg_to_coord(square)))
-            {
+            if (is_white(...alg_to_coord(square))) {
                 $board.find(".square-" + square).addClass("highlight_white")
-            }
-            else
-            {
+            } else {
                 $board.find(".square-" + square).addClass("highlight_black")
             }
         })
@@ -258,8 +252,7 @@ function play(game, timer) {
             $score.html(score)
             if (rounds == max_rounds) {
                 timer.stop()
-            }
-            else {
+            } else {
                 game.next_round()
             }
         }
