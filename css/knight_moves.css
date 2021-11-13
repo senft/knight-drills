@@ -1,9 +1,13 @@
-.highlight_fork {
-  box-shadow: inset 0 0 3px 3px red;
+.highlight_white {
+  box-sizing: border-box;
+  border: 3px solid black;
+  background: repeating-linear-gradient(-45deg, #000000, #000000 5px, #f0d9b5 5px, #f0d9b5 15px);
 }
 
-.highlight_target {
-  box-shadow: inset 0 0 3px 3px yellow;
+.highlight_black {
+  box-sizing: border-box;
+  border: 3px solid black;
+  background: repeating-linear-gradient(-45deg, #000000, #000000 5px, #b58863 5px, #b58863 15px);
 }
 
 #board {

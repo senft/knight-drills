@@ -45,6 +45,15 @@ function alg_to_coord(coord) {
     return [ALG_TO_COORD[coord[0]], coord[1] - 1]
 }
 
+function is_white(x, y) {
+    console.log("x=", x, "y=", y)
+    if (y % 2 == 0) {
+        return x % 2 != 0
+    } else {
+        return x % 2 == 0
+    }
+}
+
 function get_min_distance(source, destination, avoid = []) {
     // BFS to find minimal number of knight moves from source to destination
     var to_visit = [
@@ -110,11 +119,19 @@ class Game {
     distance = null
 
     highlight() {
-        $board.find(".square-" + this.targets[0]).addClass("highlight_target")
+        if (is_white(...alg_to_coord(this.targets[0])))
+        {
+          $board.find(".square-" + this.targets[0]).addClass("highlight_white")
+        }
+        else
+        {
+          $board.find(".square-" + this.targets[0]).addClass("highlight_black")
+        }
     }
 
     remove_highlights() {
-        $board.find(".square-" + this.targets[0]).removeClass("highlight_target")
+        $board.find(".square-" + this.targets[0]).removeClass("highlight_white")
+        $board.find(".square-" + this.targets[0]).removeClass("highlight_black")
     }
 
     next_round() {
@@ -154,11 +171,21 @@ class ForkMode extends Game {
     fork_targets = []
 
     highlight() {
-        this.fork_targets.forEach(square => $board.find(".square-" + square).addClass("highlight_fork"))
+        this.fork_targets.forEach(square => {
+            if (is_white(...alg_to_coord(square)))
+            {
+                $board.find(".square-" + square).addClass("highlight_white")
+            }
+            else
+            {
+                $board.find(".square-" + square).addClass("highlight_black")
+            }
+        })
     }
 
     remove_highlights() {
-        this.fork_targets.forEach(square => $board.find(".square-" + square).removeClass("highlight_fork"))
+        this.fork_targets.forEach(square => $board.find(".square-" + square).removeClass("highlight_white"))
+        this.fork_targets.forEach(square => $board.find(".square-" + square).removeClass("highlight_black"))
     }
 
     next_round() {
