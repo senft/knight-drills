@@ -46,7 +46,6 @@ function alg_to_coord(coord) {
 }
 
 function is_white(x, y) {
-    console.log("x=", x, "y=", y)
     if (y % 2 == 0) {
         return x % 2 != 0
     } else {
@@ -140,7 +139,6 @@ class Game {
         this.targets = [new_target]
 
         this.distance = get_min_distance(this.cur_position, this.targets[0])
-        console.log("target: " + this.targets[0] + ", distance: " + this.distance)
         this.highlight()
         this.num_moves = 0
     }
@@ -210,9 +208,6 @@ class ForkMode extends Game {
             this.next_round()
             return
         }
-
-        console.log("fork_targets: " + JSON.stringify(this.fork_targets))
-        console.log("targets: " + JSON.stringify(this.targets) + ", distance: " + this.distance)
     }
 
     move_to(destination) {
