@@ -1,6 +1,8 @@
 # knight-drills
 A collection of simple chess mini-games to train knights moves.
 
+Check it out at https://senft.github.io/knight-drills/.
+
 # attributions
 
 * jQuery, https://jquery.com/
