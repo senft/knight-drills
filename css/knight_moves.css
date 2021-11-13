@@ -1,13 +1,13 @@
 .highlight_white {
   box-sizing: border-box;
   border: 3px solid black;
-  background: repeating-linear-gradient(-45deg, #000000, #000000 5px, #f0d9b5 5px, #f0d9b5 15px);
+  background: repeating-linear-gradient(-45deg, #454545, #454545 5px, #f0d9b5 5px, #f0d9b5 15px);
 }
 
 .highlight_black {
   box-sizing: border-box;
   border: 3px solid black;
-  background: repeating-linear-gradient(-45deg, #000000, #000000 5px, #b58863 5px, #b58863 15px);
+  background: repeating-linear-gradient(-45deg, #454545, #454545 5px, #b58863 5px, #b58863 15px);
 }
 
 #board {
