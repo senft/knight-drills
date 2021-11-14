@@ -718,7 +718,7 @@ function Chessboard(containerId, config) {
 					if (_validMoves && _validMoves.length !== 0) {
 						setSelectedSquareElement(index);
 						
-						if (!isSquareEmpty(index)) {
+						if (_config.showNextMove && !isSquareEmpty(index)) {
 							for (i = 0; i < _validMoves.length; i++) {
 								getSquareElement(_validMoves[i]).addClass(Chessboard.CSS.square.validMove.className);
 							}
