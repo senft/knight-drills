@@ -233,43 +233,42 @@ function play(game, timer) {
         if (game.is_finished() && rounds == max_rounds) {
             return;
         }
-        return get_knight_moves(square).map(s => ChessUtils.convertNotationSquareToIndex(s));
-    }
 
-    function on_move(move) {
-        if (timer.state != "running") {
-            timer.start();
+        if (game.move_to(square)) {
+            if (timer.state != "running") {
+                timer.start();
+            }
+
+            // selected square is a legal knight destination, then we just move there
+            board.setPosition({
+                [game.cur_position]: "wN"
+            });
+
+            if (game.is_finished()) {
+                rounds++;
+                if (game.is_won()) {
+                    snd_success.play();
+                    console.log("score");
+                    score++;
+                } else {
+                    snd_fail.play();
+                    console.log("wrong");
+                }
+                $score.html(score);
+                if (rounds == max_rounds) {
+                    timer.stop();
+                } else {
+                    game.next_round();
+                }
+            }
         }
 
-        game.move_to(move.to);
-
-        if (game.is_finished()) {
-            rounds++;
-            if (game.is_won()) {
-                snd_success.play();
-                console.log("score");
-                score++;
-            } else {
-                snd_fail.play();
-                console.log("wrong");
-            }
-            $score.html(score);
-            if (rounds == max_rounds) {
-                timer.stop();
-            } else {
-                game.next_round();
-            }
-        }
-
-        return {
-            [move.to]: "wN"
-        };
+        return []
     }
 
     const config = {
         eventHandlers: {
-            onPieceSelected: on_select,
-            onMove: on_move,
+            onPieceSelected: on_select
         },
         useAnimation: false,
         showNextMove: false,
