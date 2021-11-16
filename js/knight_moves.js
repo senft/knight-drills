@@ -116,10 +116,10 @@ function get_square(square) {
 
 class Game {
     constructor() {
-      this.cur_position = random_square();
-      this.targets = [random_square()];
-      this.num_moves = null;
-      this.distance = null;
+        this.cur_position = random_square();
+        this.targets = [random_square()];
+        this.num_moves = null;
+        this.distance = null;
     }
 
     highlight() {
@@ -169,8 +169,8 @@ class Game {
 
 class ForkMode extends Game {
     constructor() {
-      super();
-      this.fork_targets = [];
+        super();
+        this.fork_targets = [];
     }
 
     highlight() {
